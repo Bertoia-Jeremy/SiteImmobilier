@@ -2,10 +2,12 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\Query;
 use App\Entity\Property;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\PropertySearch;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Property|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,14 +23,33 @@ class PropertyRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Property[] Returns an array of Property objects
+    //  * @return Query
     //  */
 
-    public function findAllVisible(): array
+    public function findAllVisibleQuery(PropertySearch $search): Query
     {
-        return $this->findVisibleQuery()
-                    ->getQuery()
-                    ->getResult();
+        $query = $this->findVisibleQuery('p');
+
+        if($search->getMaxPrice()){
+            $query = $query->andWhere('p.price < :maxprice')
+                            ->setParameter('maxprice', $search->getMaxPrice());
+        }
+                      
+        if($search->getMinSurface()){
+            $query = $query->andWhere('p.surface > :minsurface')
+                            ->setParameter('minsurface', $search->getMinSurface());
+        }
+
+        if($search->getOptions()->count() > 0){
+            $k = 0;
+            foreach($search->getOptions() as $option){
+                $query = $query->andWhere(":option$k MEMBER OF p.options")
+                               ->setParameter("option$k", $option);
+                $k++;
+            }
+        }
+
+        return $query->getQuery();
     }
 
     // /**
@@ -37,7 +58,7 @@ class PropertyRepository extends ServiceEntityRepository
     public function findLatest(): array
     {
         return $this->findVisibleQuery()
-                    ->setMaxResults(4)
+                    ->setMaxResults(5)
                     ->getQuery()
                     ->getResult();
     }

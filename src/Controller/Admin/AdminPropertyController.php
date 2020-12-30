@@ -1,15 +1,19 @@
 <?php
 
-namespace App\Controller\Admin\Property;
+namespace App\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\PropertyRepository;
+use App\Entity\Option;
 use App\Entity\Property;
 use App\Form\PropertyType;
+use App\Repository\PropertyRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @Route("/admin/property")
+ */
 class AdminPropertyController extends AbstractController
 {
     private $repository;
@@ -19,7 +23,7 @@ class AdminPropertyController extends AbstractController
     }
     
     /**
-        * @Route("/admin/property", name="admin.property.index")
+        * @Route("/", name="admin.property.index")
     */
     public function index(){
         $properties = $this->repository->findAll();
@@ -27,7 +31,7 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-        * @Route("/admin/property/new", name="admin.property.new")
+        * @Route("/new", name="admin.property.new")
     */
     public function new(Request $request){
         $property = new Property;
@@ -50,9 +54,11 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-        * @Route("/admin/property/{id}", name="admin.property.edit", methods="GET|POST")
+        * @Route("/{id}", name="admin.property.edit", methods="GET|POST")
     */
     public function edit(Property $property, Request $request){
+        /* $option = new Option;
+        $property->addOption($option); Permet d'ajouter des options */
 
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
@@ -71,7 +77,7 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-        * @Route("/admin/property/{id}", name="admin.property.delete", methods="DELETE")
+        * @Route("/{id}", name="admin.property.delete", methods="DELETE")
     */
     public function delete(Property $property, Request $request){
 
