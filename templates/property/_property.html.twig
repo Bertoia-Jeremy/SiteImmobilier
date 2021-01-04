@@ -1,6 +1,8 @@
 <div class="card mb-4">
         {% if property.fileName %}
             <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" class="img-fluid">
+        {% else %}
+            <img src="{{ 'images/properties/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top" class="img-fluid">
         {% endif %}
     <div class="card-body">
         

@@ -10,8 +10,17 @@ liip_imagine :
 
             # list of transformations to apply (the "filters")
             filters :
-
-                # create a thumbnail: set size to 120x90 and use the "outbound" mode
+                # create a thumbnail: set size to 360x230 and use the "outbound" mode
                 # to crop the image when the size ratio of the input differs
                 thumbnail  : { size : [360, 230], mode : outbound }
+
+        # the name of the "filter set"
+        medium :
+            # adjust the image quality to 75%
+            quality : 75
+            # list of transformations to apply (the "filters")
+            filters :
+                # create a thumbnail: set size to 800x530 and use the "outbound" mode
+                # to crop the image when the size ratio of the input differs
+                thumbnail  : { size : [800, 530], mode : outbound }
 
