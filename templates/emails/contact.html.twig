@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}Gérer les biens{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Email - Contact</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom du bien</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Téléphone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="{{ url('property.show', {id: contact.property.id, slug: contact.property.slug} )}}">{{ contact.property.title }}</a></td>
+                    <td>{{ contact.firstName }}</td>
+                    <td>{{ contact.lastName }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td>{{ contact.email }}</td>
+                </tr>
+                <tr>
+                    <td>Message : </td>
+                    <td class="colspan-4">{{ contact.message }}</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="text-right">
+            <a href="{{ path('admin.property.new') }}" class="btn btn-sm btn-primary my-2">+ Créer un nouveau bien </a>
+        </div>
+    </div>
+{% endblock %}
