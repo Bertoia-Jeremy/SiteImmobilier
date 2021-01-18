@@ -1,31 +1,120 @@
 {% extends 'base.html.twig' %}
-{% block title %} Agence de Jéjé {% endblock %}
+{% block title %} Agence de Jérémy {% endblock %}
 {% block body %}
-    <div class="jumbotron text-center my-3">
-        <div class="container">
-            <h2>Agence de Jéjé</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam perferendis reprehenderit ratione, laboriosam velit tempore. Ducimus facilis fugiat magni laudantium?</p>
+    <div class="text-center my-4">
+        <div class="container py-4">
+            <h2>Agence de Jérémy</h2>
+            <p>Vous recherchez un bien et vous en savez pas par où commencer ? L'agence de Jérémy vous propose une multitude de biens, 
+                avec ou sans balcon, ascenseur ou non, vous pouvez chercher votre futur logement aussi facilement que vous faites vos courses !</p>
         </div>    
     </div>
     
-    <div class="container">
-        <div class="row mx-0 justify-content-around">
-            {% for property in properties %}
-                <div class="col-4-lg col-6-md col-12-sm my-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a>
-                            </h5>
-                            <p class="card-text">
-                                {{ property.city }} {{ property.postalCode }}
-                            </p>
-                            <div class="text-primary" style="font-weight: bold; font-size: 2rem;"> {{ property.formattedPrice }} €</div>
+    <section class="container">
+        {# Affichage 4 logements - Ascenseur #}
+        <div class="container border-top border-primary border-bottom border-primary py-4">
+            <h3 class="text-center text-secondary">Logements disposant d'un ascenseur :</h3>
+
+            <div class="row mx-0 justify-content-around align-items-stretch">
+                {% for property in properties_ascenseur %}
+
+                    <div class="col-3-lg col-6-md col-12-sm my-2">
+                        <div class="card">
+                            {% if property.fileName %}
+                                <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" class="img-fluid" style="max-width: 250px;">
+                            {% else %}
+                                <img src="{{ 'images/properties/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top" class="img-fluid">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{% if property.title |length > 18 %}
+                                                                                                                    {{ property.title |slice(0, 16)}}...
+                                                                                                                  {% else %}
+                                                                                                                    {{ property.title }}
+                                                                                                                  {% endif %}</a>
+                                </h5>
+                                <p class="card-text">
+                                    {{ property.city }} {{ property.postalCode }}
+                                </p>
+                                <div class="text-primary" style="font-weight: bold; font-size: 2rem;"> {{ property.formattedPrice }} €</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+
+                {% endfor %}
+            </div>
         </div>
-    </div>
+
+       {# Affichage 4 logements - Balcon #}
+        <div class="container border-bottom py-4">
+            <h3 class="text-center text-secondary">Logements comprenant un balcon :</h3>
+
+            <div class="row mx-0 justify-content-around align-items-stretch">
+                {% for property in properties_balcon %}
+
+                    <div class="col-4-lg col-6-md col-12-sm my-2">
+                        <div class="card">
+                            {% if property.fileName %}
+                                <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" class="img-fluid" style="max-width: 250px;">
+                            {% else %}
+                                <img src="{{ 'images/properties/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top" class="img-fluid">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{% if property.title |length > 18 %}
+                                                                                                                    {{ property.title |slice(0, 16)}}...
+                                                                                                                  {% else %}
+                                                                                                                    {{ property.title }}
+                                                                                                                  {% endif %}</a>
+                                </h5>
+                                <p class="card-text">
+                                    {{ property.city }} {{ property.postalCode }}
+                                </p>
+                                <div class="text-primary" style="font-weight: bold; font-size: 2rem;"> {{ property.formattedPrice }} €</div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+        {# Affichage 4 logements - Derniers logement ajoutés #}
+        <div class="container border-top border-primary border-bottom py-4">
+            <h3 class="text-center text-secondary">Derniers logements ajoutés :</h3>
+
+            <div class="row mx-0 justify-content-around align-items-stretch">
+                {% for property in properties_last %}
+
+                    <div class="col-4-lg col-6-md col-12-sm my-2">
+                        <div class="card">
+                            {% if property.fileName %}
+                                <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" class="img-fluid" style="max-width: 250px;">
+                            {% else %}
+                                <img src="{{ 'images/properties/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top" class="img-fluid">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{% if property.title |length > 18 %}
+                                                                                                                    {{ property.title |slice(0, 16)}}...
+                                                                                                                  {% else %}
+                                                                                                                    {{ property.title }}
+                                                                                                                  {% endif %}</a>
+                                </h5>
+                                <p class="card-text">
+                                    {{ property.city }} {{ property.postalCode }}
+                                </p>
+                                <div class="text-primary" style="font-weight: bold; font-size: 2rem;"> {{ property.formattedPrice }} €</div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>            
+        </div>
+
+        <div class="text-center my-4">
+            <a href="{{ path('property.index') }}" class="btn-block btn-lg btn-secondary text-decoration-none">Voir tous les logements</a>
+        </div>
+    </section>
 
 {% endblock %}

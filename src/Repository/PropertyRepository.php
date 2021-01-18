@@ -22,13 +22,14 @@ class PropertyRepository extends ServiceEntityRepository
         parent::__construct($registry, Property::class);
     }
 
-    // /**
-    //  * @return Query
-    //  */
+    /**
+     * @return Query
+     */
 
     public function findAllVisibleQuery(PropertySearch $search): Query
     {
-        $query = $this->findVisibleQuery('p');
+        $query = $this->createQueryBuilder('p')
+                      ->Where('p.sold = false');
 
         if($search->getMaxPrice()){
             $query = $query->andWhere('p.price < :maxprice')
@@ -52,13 +53,24 @@ class PropertyRepository extends ServiceEntityRepository
         return $query->getQuery();
     }
 
-    // /**
-    //  * @return Property[] Returns an array of Property objects
-    //  */
+    /**
+     * @return Property[] Returns an array of Property objects
+     */
     public function findLatest(): array
     {
         return $this->findVisibleQuery()
-                    ->setMaxResults(5)
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    /**
+     * @return Property[] Returns an array of Property objects
+     */
+    public function findByOption($option): array
+    {
+        return $this->findVisibleQuery()
+                    ->andWhere(":option MEMBER OF p.options ")
+                        ->setParameter("option", $option->getId())
                     ->getQuery()
                     ->getResult();
     }
@@ -66,6 +78,7 @@ class PropertyRepository extends ServiceEntityRepository
     private function findVisibleQuery(): QueryBuilder
     {
         return $this->createQueryBuilder('p')
+                    ->setMaxResults(4)
                     ->Where('p.sold = false');
     }
 

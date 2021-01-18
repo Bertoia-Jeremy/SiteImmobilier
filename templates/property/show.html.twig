@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %} Acheter {% endblock %}
 {% block body %}
-   <div class="jumbotron">
+   <div class="jumbotron py-4">
         <div class="container mt-3">
             <div class="row mx-0">
                 <div class="col-md-8">
@@ -13,7 +13,7 @@
                 <div class="col-md-4">
                     <h1>{{ property.title }}</h1>
                     <h2> {{ property.rooms }}pièce(s) - {{ property.surface }}m²</h2>
-                    <div class="text-primary" style="font-weight: bold; font-size: 4rem;"> {{ property.formattedPrice }} €</div>
+                    <div class="text-primary" style="font-weight: bold; font-size: 3.5rem;"> {{ property.formattedPrice }} €</div>
                     <a class="btn btn-primary" href="#" id="contactButton" {% if form.vars.submitted %} style="display:none;" {% endif %}>
                         Contacter l'agence
                     </a>
@@ -40,7 +40,11 @@
             </div>
         </div>
    </div>
-    <p> {{ property.description | nl2br }}</p>
+   <div class="px-4 ">
+        <h3>Descritpion :</h3>
+        <p class="border-bottom pb-4"> {{ property.description | nl2br }}</p>
+   </div>
+    
 
     <div class="row mx-0">
         <div class="col-md-8">
@@ -71,12 +75,16 @@
         <div class="col-md-4">
             <h2>Spécificités</h2>
             <ul class="list-group">
+
+            {% if property.options|length == 0 %}
+                <li class="list-group-item">Aucune spécificité.</li>
+            {% else %}
                 {% for option in property.options %}
                     <li class="list-group-item">{{ option.name }}</li>
                 {% endfor %}
+            {% endif %}
             </ul>
         </div>
     </div>
 
-    <nav class="nav nav-tabs my-3" id="tab"></nav>
 {% endblock %}

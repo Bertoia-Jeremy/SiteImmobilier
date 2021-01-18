@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block title %} Acheter {% endblock %}
 {% block body %}
-    <div class="jumbotron">
+    <div class="jumbotron pt-3 pb-2">
         <div class="container">
+            <h4>Affiner vos recherches :</h4>
             {{ form_start(form) }}
             <div class="form-row align-items-end">
                 <div class="col">
@@ -23,11 +24,14 @@
     </div>
     <div class="container">
         <h2>Voir tous nos biens</h2>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam perferendis reprehenderit ratione, laboriosam velit tempore. Ducimus facilis fugiat magni laudantium?</p>
+        <p class="px-2">
+            Voici tous les biens actuellement disponible à l'achat. N'hésitez pas à utiliser le formulaire ci-dessus
+            afin d'afficher seulement les biens qui vous intéressent.
+        </p>
     </div>   
 
     <div class="container">
-        <div class="row mx-0 justify-content-around">
+        <div class="row mx-0 justify-content-around align-items-stretch">
             {% for property in properties %}
                 <div class="col-4">
                     {% include ('/property/_property.html.twig') %}

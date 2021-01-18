@@ -1,17 +1,21 @@
-<div class="card mb-4">
+<div class="card mb-4 shadow-sm">
         {% if property.fileName %}
             <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" class="img-fluid">
         {% else %}
             <img src="{{ 'images/properties/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top" class="img-fluid">
         {% endif %}
+
     <div class="card-body">
-        
         <h5 class="card-title">
-            <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a>
+            <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">
+                {{ property.title }}
+            </a>
         </h5>
         <p class="card-text">
             {{ property.surface }}m² - {{ property.city }} {{ property.postalCode }}
         </p>
-        <div class="text-primary" style="font-weight: bold; font-size: 2rem;"> {{ property.formattedPrice }} €</div>
+        <div class="text-primary text-center" style="font-weight: bold; font-size: 2rem;"> 
+            {{ property.formattedPrice }} €
+        </div>
     </div>
 </div>

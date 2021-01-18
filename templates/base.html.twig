@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}MaSuperAgence{% endblock %}</title>
+        <title>{% block title %}Agence Jérémy{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
         
@@ -13,35 +13,73 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand " href="{{ path('property.index') }}">Agence Jéjé</a>
+            <a class="navbar-brand " href="{{ path('home') }}">Agence Jérémy</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if current_menu is defined and current_menu == 'Accueil' %} active {% endif %}" href="{{ path('home') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if current_menu is defined and current_menu == 'properties' %} active {% endif %}" href="{{ path('property.index') }}">Acheter</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('home') }}">Vendre</a>
-                    </li>
                     {% if not app.user %}
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ path('login')}}">Connexion</a>
+                            <a class="nav-link {% if current_menu is defined and current_menu == 'login' %} active {% endif %}" href="{{ path('login')}}">Connexion</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ path('logout')}}">Déconnexion</a>
+                            <a class="nav-link" href="{{ path('logout')}}">Déconnexion</a>
                         </li>
                     {% endif %}
                 </ul>
             </div>
         </nav>
         {% block body %}{% endblock %}
+        
+        <footer class="bg-primary text-white mt-5 pt-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <ul class="list-unstyled">
+                            <h4> Navigate</h4>
+                            <li><a class="text-white" href="{{ path('home') }}">Accueil</a></li>
+                            <li><a class="text-white" href="{{ path('property.index') }}">Acheter</a></a></li>
+                            {% if not app.user %}
+                                <li class="nav-item">
+                                    <a class="text-white" href="{{ path('login')}}">Connexion</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="text-white" href="{{ path('logout')}}">Déconnexion</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 col-xs-12">
+                        <ul class="list-unstyled">
+                            <h4>Contact</h4>
+                            <li><a href="https://www.linkedin.com/in/j%C3%A9r%C3%A9my-berto%C3%AFa-756875178/" class="text-decoration-none text-white">Jérémy Bertoïa</a></li>
+                            <li>bertoia.jeremy@hotmail.fr</li>
+                            <li>Lyon, France</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 col-xs-12">
+                        <ul class="list-unstyled">
+                            <h4>En savoir plus</h4>
+                            <li><a href="Lien GitHub : https://github.com/Bertoia-Jeremy" target="_blank" class="text-white">GitHub</a></li>
+                            <li><a href="https://www.linkedin.com/in/j%C3%A9r%C3%A9my-berto%C3%AFa-756875178/" class="text-white" target="_blank">LinkedIn</a></li>
+                            <li><a href="Lien AssessFirst : https://app.assessfirst.com/_/profile/qr9ssdj5-jeremy-bertoia" target="_blank" class="text-white">Assetfirst</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
