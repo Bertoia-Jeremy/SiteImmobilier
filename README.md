@@ -34,7 +34,7 @@ Connaissant plusieurs personnes travaillant sur Symfony je me suis naturellement
 
 ## Aperçu du résultat
     
-    Voir le PDF [SiteImmobilier.pdf](https://github.com/Bertoia-Jeremy/Site_immobilier/blob/main/SiteImmobilier.pdf)
+ * Voir le PDF [SiteImmobilier.pdf](https://github.com/Bertoia-Jeremy/Site_immobilier/blob/main/SiteImmobilier.pdf)
 
 ## Fabriqué avec
 * [Symfony](https://symfony.com/) - Framework PHP (Back-end)
