@@ -26,7 +26,7 @@ Connaissant plusieurs personnes travaillant sur Symfony je me suis naturellement
   * Utiliser les différents filtres et opérateurs TWIG
   * Utiliser les filtres TWIG
  
- * Pour plus de détails sur ce que j'ai pu voir tout au long de mon apprentissage sur Symfony voir Symfony.pdf
+ * Pour plus de détails sur ce que j'ai pu voir tout au long de mon apprentissage sur Symfony voir [Symfony.pdf](https://github.com/Bertoia-Jeremy/Site_immobilier/blob/main/Symfony.pdf)
  * Je me sers régulièrement de ce fichier pdf que j'enrichis au fur et à mesure que j'apprends (je le fais pour tous les langages).
  
   
@@ -34,7 +34,7 @@ Connaissant plusieurs personnes travaillant sur Symfony je me suis naturellement
 
 ## Aperçu du résultat
     
-    Voir le PDF SiteImmobilier.pdf
+    Voir le PDF [SiteImmobilier.pdf](https://github.com/Bertoia-Jeremy/Site_immobilier/blob/main/SiteImmobilier.pdf)
 
 ## Fabriqué avec
 * [Symfony](https://symfony.com/) - Framework PHP (Back-end)
